@@ -22,10 +22,10 @@ public class Main {
 		
 
 		p1 = gameLoop.characterCreation();
-		gameLoop.selectPlayer(p1);
+		gameLoop.statPlayer(p1);
 		p1.description();
 		p2 = gameLoop.characterCreation();
-		gameLoop.selectPlayer(p2);
+		gameLoop.statPlayer(p2);
 		p2.description();
 		
 		gameLoop.gameLoop(p1, p2);
