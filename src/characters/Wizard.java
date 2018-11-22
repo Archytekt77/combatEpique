@@ -11,25 +11,24 @@ public class Wizard implements Characters {
 	
 	String cry = "Abracadabra";
 
-
 	@Override
-	public void basicAttack() {
-		System.out.println(" utilise Boule de Feu et inflige " + statistique.getIntelligence() + " dommages");
-
+	public int basicAttack(String str, String str2) {
+		System.out.println(str + " utilise Boule de Feu et inflige " + statistique.getIntelligence() + " dommages");
+		System.out.println(str2 + " perds " + statistique.getIntelligence() + " points de vie");
+		return statistique.getIntelligence();
 	}
-
+	
 	@Override
-	public void specialAttack() {
-		System.out.println(" utilise Soin et gagne " + statistique.getIntelligence()*2 + " en vitalité.");
-
+	public int specialAttack(String str, String str2) {
+		System.out.println(str + " utilise Soin et gagne " + statistique.getIntelligence()*2 + " en vitalité.");
+		return statistique.getIntelligence()*2;
 	}
-
+	
 	@Override
-	public void description() {
+	public void description(String str) {
 		System.out.println(
-				cry + " je suis le Mage niveau " + statistique.getLvl() + " je possède " + statistique.getLife() + " de vitalité, "
+				cry + "je suis le  Mage " + str + " niveau " + statistique.getLvl() + " je possède " + statistique.getLife() + " de vitalité, "
 						+ statistique.getForce() + " de force, " + statistique.getAgility() + " d'agilité et " + statistique.getIntelligence() + " d'intelligence !");
-		
 	}
 
 	@Override
@@ -42,5 +41,4 @@ public class Wizard implements Characters {
 	public Statistique getStatistique() {
 		return statistique;
 	}
-
 }

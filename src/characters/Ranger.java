@@ -13,22 +13,22 @@ public class Ranger implements Characters{
 	
 
 	@Override
-	public void basicAttack() {
-		System.out.println(" utilise Tir à l'arc et inflige " + statistique.getAgility() + " dommages");
-		
+	public int basicAttack(String str, String str2) {
+		System.out.println(str + " utilise Tir à l'arc et inflige " + statistique.getAgility() + " dommages");
+		System.out.println(str2 + " perds " + statistique.getAgility() + " points de vie");
+		return statistique.getAgility();
 	}
 
 	@Override
-	public void specialAttack() {
-		System.out.println(" utilise Concentration et gagne "  + statistique.getAgility()/2 + " en agilité");
-		
+	public int specialAttack(String str, String str2) {
+		System.out.println(str + " utilise Concentration et gagne "  + statistique.getAgility()/2 + " en agilité");
+		return statistique.getAgility()/2;
 	}
-
+	
 	@Override
-	public void description() {
-		System.out.println(cry + " je suis le Rôdeur niveau " + statistique.getLvl() + " je possède " + statistique.getLife() + " de vitalité, " 
+	public void description(String str) {
+		System.out.println(cry + " je suis le Rôdeur " + str + " niveau " + statistique.getLvl() + " je possède " + statistique.getLife() + " de vitalité, " 
 				+ statistique.getForce() + " de force, " + statistique.getAgility() + " d'agilité et " + statistique.getIntelligence() + " d'intelligence !");
-		
 	}
 
 	@Override
@@ -40,7 +40,4 @@ public class Ranger implements Characters{
 	public Statistique getStatistique() {
 		return statistique;
 	}
-	
-	
-
 }

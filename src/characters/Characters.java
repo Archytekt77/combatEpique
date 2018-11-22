@@ -7,11 +7,9 @@ public interface Characters {
 	
 	public Statistique getStatistique();
 	
-	void basicAttack();
+	int basicAttack(String str, String str2);
 	
-	void specialAttack();
+	int specialAttack(String str, String str2);
 	
-	void description();
-
-
+	void description(String str);
 }

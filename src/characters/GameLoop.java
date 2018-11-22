@@ -14,29 +14,23 @@ public class GameLoop {
 	
 	public Characters characterCreation() {
 		
-		Characters p = new Warrior();
-		try {
-			int classe = 0;
-			System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rôdeur, 3: Mage)");
-			classe = sc.nextInt();
-			switch(classe){
-			case 1:
-				return new Warrior();
-			case 2:
-				return new Ranger();
-			case 3:
-				return new Wizard();
-			}
-			if (classe != 1 || classe != 2 || classe != 3) {
-				System.out.println("Vous n'avez pas rentrée une réponse comprise entre 1 et 3.");
-				throw new InputMismatchException();
-			}
-		} catch (InputMismatchException e) {
-			System.out.println("Vous n'avez pas rentrée une réponse comprise entre 1 et 3.");
-			sc = new Scanner(System.in);
-			characterCreation();
+		Characters p = null;
+		int classe = 0;
+		
+		System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rôdeur, 3: Mage)");
+		classe = sc.nextInt();
+		switch(classe){
+		case 1:
+			return new Warrior();
+		case 2:
+			return new Ranger();
+		case 3:
+			return new Wizard();
 		}
-		return ;
+		if (classe != 1 || classe != 2 || classe != 3)
+			throw new InputMismatchException();
+			
+		return p;
 		}
 	
 	
@@ -70,38 +64,45 @@ public class GameLoop {
 	
 
 	public void gameLoop(Characters p1, Characters p2) {
-		for (int turn = 0; p1.getStatistique().getLife() !=0 && p2.getStatistique().getLife() !=0; turn++){
+		for (int turn = 0; p1.getStatistique().getLife() != 0 && p2.getStatistique().getLife() != 0; turn++){
 			if (turn % 2 == 0) {
-				getPlayerChoice(p1);
+				getPlayerChoice(p1, p2, "Joueur 1 ", "Joueur 2");
 			}
 			else {
-				getPlayerChoice(p2);
+				getPlayerChoice(p2, p1, "Joueur 2 ", "Joueur 1");
 			}
-				
 			}	
 	}
 
 	
-	public void getPlayerChoice(Characters p) {
+	public void getPlayerChoice(Characters p1, Characters p2, String str, String str2) {
 		try {
 			int response = 0;
 			
-			System.out.println("veuillez choisir votre action (1: Attaque basique, 2: Attaque Spéciale)");
+			System.out.println(str + "(" + p1.getStatistique().getLife() + " Vitalité) veuillez choisir votre action (1: Attaque basique, 2: Attaque Spéciale)");
 			response = sc.nextInt();
 			
-			if (response == 1)
-				p.basicAttack();
-			if (response == 2)
-				p.specialAttack();
+			if (response == 1) {
+				p2.getStatistique().setLife(p2.getStatistique().getLife() - p1.basicAttack(str, str2));
+			}
+			if (response == 2 && p1.getStatistique().getForce() > 0) {
+				p2.getStatistique().setLife(p2.getStatistique().getLife() - p1.specialAttack(str, str2));
+				p1.getStatistique().setLife(p1.getStatistique().getLife() - p1.getStatistique().getForce()/2);
+			}
+			if (response == 2 && p1.getStatistique().getAgility() > 0) {
+				p1.getStatistique().setAgility(p1.getStatistique().getAgility() + p1.specialAttack(str, str2));
+			}
+			if (response == 2 && p1.getStatistique().getIntelligence() > 0) {
+				p1.getStatistique().setLife(p1.getStatistique().getLife() + p1.specialAttack(str, str2));
+			}
+					
 			if (response != 1 && response != 2) {
 				System.out.println("Vous n'avez pas choisis entre 1 et 2.");
 				throw new InputMismatchException();
 			}
-			
 		} catch (InputMismatchException e) {
-			System.out.println("Vous n'avez pas choisis entre 1 et 2.");
 			sc = new Scanner(System.in);
-			getPlayerChoice(p);
+			getPlayerChoice(p1, p2, str, str2);
 		}
 	}
 	
