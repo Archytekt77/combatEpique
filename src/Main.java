@@ -51,7 +51,7 @@ public class Main {
 		
 		/*
 		try{
-			String question = "O";
+			String question = null;
 			
 			System.out.println("Voulez vous recommencez (O / N) ?");
 			question =  sc.nextLine();
